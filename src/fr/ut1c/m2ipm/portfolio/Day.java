@@ -1,5 +1,7 @@
 package fr.ut1c.m2ipm.portfolio;
 
+import java.util.Objects;
+
 public class Day {
 
     private int year;
@@ -38,10 +40,7 @@ public class Day {
         if (this.year != other.year) {
             return false;
         }
-        if (this.dayNumber != other.dayNumber) {
-            return false;
-        }
-        return true;
+        return Objects.equals(this.dayNumber, other.dayNumber);
     }
 
 }
