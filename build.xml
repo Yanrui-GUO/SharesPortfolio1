@@ -34,7 +34,7 @@
   <target name="findbugs" depends="-post-jar">
     <findbugs home="${findbugs.home}"
               output="xml"
-              outputFile="build/bcel-fb.xml" >
+              outputFile="build/findbugsXml.xml" >
       <sourcePath path="${basedir}/src" />
       <class location="${basedir}/dist/SharesPortfolio.jar" />
     </findbugs>
