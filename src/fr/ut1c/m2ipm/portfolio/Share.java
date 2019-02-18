@@ -11,6 +11,9 @@ public abstract class Share {
     }
 
     public Share(String name) {
+        if (Objects.isNull(name) || name.isEmpty()) {
+            throw new IllegalArgumentException("The share name must be defined.");
+        }
         this.name = name;
     }
 
