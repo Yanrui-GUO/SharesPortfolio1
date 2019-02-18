@@ -27,6 +27,18 @@
       style="${basedir}/lib/checkstyle.xsl"/>
 
 </target>
+
+ <taskdef name="findbugs" classpath="lib/findbugs.jar" classname="edu.umd.cs.findbugs.anttask.FindBugsTask"/>
+ <property name="findbugs.home" value="${basedir}/lib" />
+
+  <target name="findbugs" depends="-post-jar">
+    <findbugs home="${findbugs.home}"
+              output="xml"
+              outputFile="build/bcel-fb.xml" >
+      <sourcePath path="${basedir}/src" />
+      <class location="${basedir}/dist/SharesPortfolio.jar" />
+    </findbugs>
+  </target>
     <!--
 
     There exist several targets which are by default empty and which can be
