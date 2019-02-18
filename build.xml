@@ -19,11 +19,11 @@
   <checkstyle config="${basedir}/lib/sun_checks.xml"
               failureProperty="checkstyle.failure"
               failOnViolation="false">
-    <formatter type="xml" tofile="build/checkstyle_report.xml"/>
+    <formatter type="xml" tofile="build/checkstyle-result.xml"/>
     <fileset dir="src" includes="**/*.java"/>
   </checkstyle>
 
-  <xslt in="build/checkstyle_report.xml" out="build/checkstyle_report.html"
+  <xslt in="build/checkstyle-result.xml" out="build/checkstyle-result.html"
       style="${basedir}/lib/checkstyle.xsl"/>
 
 </target>
