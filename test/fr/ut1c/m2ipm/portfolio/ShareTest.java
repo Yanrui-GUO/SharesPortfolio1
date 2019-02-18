@@ -28,6 +28,11 @@ public class ShareTest {
 
     @Test
     public void testConstructor() {
-        SimpleShare simpleShare = new SimpleShare("");
+        Share share = new Share("test") {
+            @Override
+            public float getPrice(Day day) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+        };
     }
 }
