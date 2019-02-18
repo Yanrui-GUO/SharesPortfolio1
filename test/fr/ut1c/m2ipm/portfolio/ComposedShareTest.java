@@ -28,6 +28,6 @@ public class ComposedShareTest {
 
     @Test
     public void testConstructor() {
-        ComposedShare cShare = new ComposedShare("");
+        ComposedShare cShare = new ComposedShare("test");
     }
 }
