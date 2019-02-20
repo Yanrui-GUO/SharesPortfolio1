@@ -19,7 +19,9 @@
             <classpath path="${basedir}/lib/sonarqube-ant-task-2.5.jar" />
         </taskdef>
 
-        <sonar:sonar />
+        <sonar:sonar>
+
+        </sonar:sonar>
     </target>
 
     <taskdef uri="antlib:org.jacoco.ant" resource="org/jacoco/ant/antlib.xml">
@@ -27,32 +29,14 @@
     </taskdef>
 
 
-
-    <target name="junittoto" depends="compile-test">
-        <delete dir="${basedir}/build/report" />
-        <mkdir dir="${basedir}/build/report" />
-
-        <junit fork="yes" dir="${basedir}" failureProperty="test.failed">
-            <classpath location="${basedir}/build/classes" />
-            <classpath location="${basedir}/build/test/classes" />
-            <classpath path ="${basedir}/lib/junit-4.10.jar"/>
-            <formatter type="xml" />
-            <batchtest todir="${basedir}/build/report">
-                <fileset dir="${basedir}/test">
-                    <include name="**/**.java" />
-                </fileset>
-            </batchtest>
-        </junit>
-    </target>
-
     <target name="jacoco" depends="compile-test">
         <delete dir="${basedir}/build/report" />
         <mkdir dir="${basedir}/build/report" />
 
         <jacoco:coverage destfile="${basedir}/build/jacoco.exec">
             <junit fork="yes" dir="${basedir}" failureProperty="test.failed">
-                <classpath location="${basedir}/build/classes" />
-                <classpath location="${basedir}/build/test/classes" />
+                <classpath location="${build.classes.dir}" />
+                <classpath location="${build.test.classes.dir}" />
                 <classpath path ="${basedir}/lib/junit-4.10.jar"/>
                 <formatter type="xml" />
                 <batchtest todir="${basedir}/build/report">
