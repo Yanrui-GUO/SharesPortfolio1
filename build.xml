@@ -1,125 +1,96 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- You may freely edit this file. See commented blocks below for -->
-<!-- some examples of how to customize the build. -->
-<!-- (If you delete it and reopen the project it will be recreated.) -->
-<!-- By default, only the Clean and Build commands use this build script. -->
-<!-- Commands such as Run, Debug, and Test only use this build script if -->
-<!-- the Compile on Save feature is turned off for the project. -->
-<!-- You can turn off the Compile on Save (or Deploy on Save) setting -->
-<!-- in the project's Project Properties dialog box.-->
-<project name="SharesPortfolio" default="default" basedir="."  xmlns:sonar="antlib:org.sonar.ant">
+<project name="SharesPortfolio" default="default" basedir="."  xmlns:sonar="antlib:org.sonar.ant" xmlns:jacoco="antlib:org.jacoco.ant">
     <description>Builds, tests, and runs the project SharesPortfolio.</description>
     <import file="nbproject/build-impl.xml"/>
 
-    <!-- Define the SonarQube global properties (the most usual way is to pass these properties via the command line) -->
-<property name="sonar.host.url" value="http://localhost:9000" />
+    <property name="sonar.host.url" value="http://localhost:9000" />
 
-<!-- Define the SonarQube project properties -->
-<property name="sonar.projectKey" value="org.sonarqube:sonarqube-scanner-ant" />
-<property name="sonar.projectName" value="Example of SonarQube Scanner for Ant Usage" />
-<property name="sonar.projectVersion" value="1.0" />
-<property name="sonar.sources" value="src" />
-<property name="sonar.java.binaries" value="build" />
-<property name="sonar.java.libraries" value="lib/*.jar" />
+    <property name="sonar.projectKey" value="org.sonarqube:sonarqube-scanner-ant" />
+    <property name="sonar.projectName" value="Shares Portfolio" />
+    <property name="sonar.projectVersion" value="1.0" />
+    <property name="sonar.sources" value="src" />
+    <property name="sonar.tests" value="test" />
+    <property name="sonar.java.binaries" value="build/classes" />
+    <property name="sonar.java.libraries" value="lib/*.jar" />
+    <property name="sonar.core.codeCoveragePlugin" value="jacoco" />
 
-<!-- Define SonarQube Scanner for Ant Target -->
-<target name="sonar">
-    <taskdef uri="antlib:org.sonar.ant" resource="org/sonar/ant/antlib.xml">
-        <!-- Update the following line, or put the "sonarqube-ant-task-*.jar" file in your "$HOME/.ant/lib" folder -->
-        <classpath path="path/to/sonar/ant/task/lib/sonarqube-ant-task-*.jar" />
+    <target name="sonar"  depends="jacoco">
+        <taskdef uri="antlib:org.sonar.ant" resource="org/sonar/ant/antlib.xml">
+            <classpath path="${basedir}/lib/sonarqube-ant-task-2.5.jar" />
+        </taskdef>
+
+        <sonar:sonar />
+    </target>
+
+    <taskdef uri="antlib:org.jacoco.ant" resource="org/jacoco/ant/antlib.xml">
+        <classpath path="${basedir}/lib/jacocoant.jar"/>
     </taskdef>
 
-    <!-- Execute SonarQube Scanner for Ant Analysis -->
-    <sonar:sonar />
-</target>
+
+
+    <target name="junittoto" depends="compile-test">
+        <delete dir="${basedir}/build/report" />
+        <mkdir dir="${basedir}/build/report" />
+
+        <junit fork="yes" dir="${basedir}" failureProperty="test.failed">
+            <classpath location="${basedir}/build/classes" />
+            <classpath location="${basedir}/build/test/classes" />
+            <classpath path ="${basedir}/lib/junit-4.10.jar"/>
+            <formatter type="xml" />
+            <batchtest todir="${basedir}/build/report">
+                <fileset dir="${basedir}/test">
+                    <include name="**/**.java" />
+                </fileset>
+            </batchtest>
+        </junit>
+    </target>
+
+    <target name="jacoco" depends="compile-test">
+        <delete dir="${basedir}/build/report" />
+        <mkdir dir="${basedir}/build/report" />
+
+        <jacoco:coverage destfile="${basedir}/build/jacoco.exec">
+            <junit fork="yes" dir="${basedir}" failureProperty="test.failed">
+                <classpath location="${basedir}/build/classes" />
+                <classpath location="${basedir}/build/test/classes" />
+                <classpath path ="${basedir}/lib/junit-4.10.jar"/>
+                <formatter type="xml" />
+                <batchtest todir="${basedir}/build/report">
+                    <fileset dir="${basedir}/test">
+                        <include name="**/**.java" />
+                    </fileset>
+                </batchtest>
+            </junit>
+        </jacoco:coverage>
+    </target>
 
     <taskdef resource="com/puppycrawl/tools/checkstyle/ant/checkstyle-ant-task.properties"
-         classpath="lib/checkstyle-8.17-all.jar"/>
+             classpath="lib/checkstyle-8.17-all.jar"/>
 
     <target name="checkstyle"
-        description="Generates a report of code convention violations.">
+            description="Generates a report of code convention violations.">
 
-  <checkstyle config="${basedir}/lib/sun_checks.xml"
-              failureProperty="checkstyle.failure"
-              failOnViolation="false">
-    <formatter type="xml" tofile="build/checkstyle-result.xml"/>
-    <fileset dir="src" includes="**/*.java"/>
-  </checkstyle>
+        <checkstyle config="${basedir}/lib/sun_checks.xml"
+                    failureProperty="checkstyle.failure"
+                    failOnViolation="false">
+            <formatter type="xml" tofile="build/checkstyle-result.xml"/>
+            <fileset dir="src" includes="**/*.java"/>
+        </checkstyle>
 
-  <xslt in="build/checkstyle-result.xml" out="build/checkstyle-result.html"
-      style="${basedir}/lib/checkstyle.xsl"/>
+        <xslt in="build/checkstyle-result.xml" out="build/checkstyle-result.html"
+              style="${basedir}/lib/checkstyle.xsl"/>
 
-</target>
+    </target>
 
- <taskdef name="findbugs" classpath="lib/findbugs.jar" classname="edu.umd.cs.findbugs.anttask.FindBugsTask"/>
- <property name="findbugs.home" value="${basedir}/lib" />
+    <taskdef name="findbugs" classpath="lib/findbugs.jar" classname="edu.umd.cs.findbugs.anttask.FindBugsTask"/>
+    <property name="findbugs.home" value="${basedir}/lib" />
 
-  <target name="findbugs" depends="-post-jar">
-    <findbugs home="${findbugs.home}"
-              output="xml"
-              outputFile="build/findbugsXml.xml" >
-      <sourcePath path="${basedir}/src" />
-      <class location="${basedir}/dist/SharesPortfolio.jar" />
-    </findbugs>
-  </target>
-    <!--
-
-    There exist several targets which are by default empty and which can be
-    used for execution of your tasks. These targets are usually executed
-    before and after some main targets. They are:
-
-      -pre-init:                 called before initialization of project properties
-      -post-init:                called after initialization of project properties
-      -pre-compile:              called before javac compilation
-      -post-compile:             called after javac compilation
-      -pre-compile-single:       called before javac compilation of single file
-      -post-compile-single:      called after javac compilation of single file
-      -pre-compile-test:         called before javac compilation of JUnit tests
-      -post-compile-test:        called after javac compilation of JUnit tests
-      -pre-compile-test-single:  called before javac compilation of single JUnit test
-      -post-compile-test-single: called after javac compilation of single JUunit test
-      -pre-jar:                  called before JAR building
-      -post-jar:                 called after JAR building
-      -post-clean:               called after cleaning build products
-
-    (Targets beginning with '-' are not intended to be called on their own.)
-
-    Example of inserting an obfuscator after compilation could look like this:
-
-        <target name="-post-compile">
-            <obfuscate>
-                <fileset dir="${build.classes.dir}"/>
-            </obfuscate>
-        </target>
-
-    For list of available properties check the imported
-    nbproject/build-impl.xml file.
-
-
-    Another way to customize the build is by overriding existing main targets.
-    The targets of interest are:
-
-      -init-macrodef-javac:     defines macro for javac compilation
-      -init-macrodef-junit:     defines macro for junit execution
-      -init-macrodef-debug:     defines macro for class debugging
-      -init-macrodef-java:      defines macro for class execution
-      -do-jar:                  JAR building
-      run:                      execution of project
-      -javadoc-build:           Javadoc generation
-      test-report:              JUnit report generation
-
-    An example of overriding the target for project execution could look like this:
-
-        <target name="run" depends="SharesPortfolio-impl.jar">
-            <exec dir="bin" executable="launcher.exe">
-                <arg file="${dist.jar}"/>
-            </exec>
-        </target>
-
-    Notice that the overridden target depends on the jar target and not only on
-    the compile target as the regular run target does. Again, for a list of available
-    properties which you can use, check the target you are overriding in the
-    nbproject/build-impl.xml file.
-
-    -->
+    <target name="findbugs" depends="-post-jar">
+        <findbugs home="${findbugs.home}"
+                  output="xml"
+                  outputFile="build/findbugsXml.xml" >
+            <sourcePath path="${basedir}/src" />
+            <class location="${basedir}/dist/SharesPortfolio.jar" />
+        </findbugs>
+    </target>
 </project>
