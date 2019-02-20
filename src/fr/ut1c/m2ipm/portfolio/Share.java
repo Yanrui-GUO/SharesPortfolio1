@@ -2,6 +2,10 @@ package fr.ut1c.m2ipm.portfolio;
 
 import java.util.Objects;
 
+/**
+ *
+ * @author Unknown
+ */
 public abstract class Share {
 
     private String name;
