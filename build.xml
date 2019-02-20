@@ -5,7 +5,7 @@
 
     <property name="sonar.host.url" value="http://localhost:9000" />
 
-    <property name="sonar.projectKey" value="org.sonarqube:sonarqube-scanner-ant" />
+    <property name="sonar.projectKey" value="base" />
     <property name="sonar.projectName" value="Shares Portfolio" />
     <property name="sonar.projectVersion" value="1.0" />
     <property name="sonar.sources" value="src" />
