@@ -24,7 +24,7 @@ public class ComposedShare extends Share {
      */
     public ComposedShare(final String name) {
         super(name);
-        this.sharesBasket = new HashMap();
+        this.sharesBasket = new HashMap<>();
     }
 
     /**

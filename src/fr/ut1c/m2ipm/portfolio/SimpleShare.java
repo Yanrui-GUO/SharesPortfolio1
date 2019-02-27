@@ -26,7 +26,7 @@ public class SimpleShare extends Share {
      */
     public SimpleShare(final String name) {
         super(name);
-        this.mapPrices = new HashMap();
+        this.mapPrices = new HashMap<>();
     }
 
     /**
