@@ -95,11 +95,11 @@ public final class Portfolio {
      * @return the computed value
      */
     public float getValue(final Day day) {
-        float total = 0;
+        double total = 0;
         for (PortfolioLine lp : this.mapLines.values()) {
             total = total + (lp.getQuantity() * lp.getShare().getPrice(day));
         }
-        return total;
+        return (float) total;
     }
 
     /**

@@ -44,7 +44,7 @@ public class ComposedShare extends Share {
      */
     @Override
     public final float getPrice(final Day day) {
-        float value;
+        double value;
 
         value = 0;
         for (Map.Entry<SimpleShare, Float> simpleShare
@@ -53,7 +53,7 @@ public class ComposedShare extends Share {
                     * simpleShare.getValue());
         }
 
-        return value;
+        return (float) value;
     }
 
 }
