@@ -73,7 +73,7 @@ public abstract class Share {
         if (obj == null) {
             return false;
         }
-        if (getClass() != obj.getClass()) {
+        if (!(obj instanceof Share)) {
             return false;
         }
         final Share other = (Share) obj;
