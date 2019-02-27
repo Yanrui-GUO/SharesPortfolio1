@@ -7,34 +7,6 @@ public class Portfolio {
 
     Map<Share, PortfolioLine> mapLines;
 
-    private class PortfolioLine {
-
-        private Share share;
-
-        private int quantity;
-
-        public int getQuantity() {
-            return quantity;
-        }
-
-        public void setQuantity(int quantity) {
-            this.quantity = quantity;
-        }
-
-        public Share getShare() {
-            return this.share;
-        }
-
-        public PortfolioLine(Share share, int quantity) {
-            this.share = share;
-            this.quantity = quantity;
-        }
-
-        public String toString() {
-            return Integer.toString(quantity);
-        }
-    }
-
     public Portfolio() {
         this.mapLines = new HashMap();
     }
@@ -47,7 +19,7 @@ public class Portfolio {
         }
     }
 
-    public void vendre(Share a, int q) {
+    public void sell(Share a, int q) {
         if (this.mapLines.containsKey(a) == true) {
             if (this.mapLines.get(a).getQuantity() > q) {
                 this.mapLines.get(a).setQuantity(this.mapLines.get(a).getQuantity() - q);
@@ -61,11 +33,39 @@ public class Portfolio {
         return this.mapLines.toString();
     }
 
-    public float valeur(Day j) {
+    public float getValue(Day j) {
         float total = 0;
         for (PortfolioLine lp : this.mapLines.values()) {
             total = total + (lp.getQuantity() * lp.getShare().getPrice(j));
         }
         return total;
+    }
+
+    private class PortfolioLine {
+
+        private Share share;
+
+        private int quantity;
+
+        public PortfolioLine(Share share, int quantity) {
+            this.share = share;
+            this.quantity = quantity;
+        }
+
+        public int getQuantity() {
+            return quantity;
+        }
+
+        public void setQuantity(int quantity) {
+            this.quantity = quantity;
+        }
+
+        public Share getShare() {
+            return this.share;
+        }
+
+        public String toString() {
+            return Integer.toString(quantity);
+        }
     }
 }
