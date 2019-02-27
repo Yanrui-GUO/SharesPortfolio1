@@ -6,6 +6,7 @@
 package fr.ut1c.m2ipm.portfolio;
 
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -14,6 +15,22 @@ import org.junit.Test;
  * @author David
  */
 public class ComposedShareTest {
+
+    private static final String WELL_FORMED_NAME1 = "name1";
+    private static final String WELL_FORMED_NAME2 = "name2";
+    private static final String WELL_FORMED_NAME3 = "name3";
+    private static final String MALFORMED_NAME = "";
+    private static final String NULL_NAME = null;
+    private static final Day DEFAULT_DAY = new Day(1, 1);
+    private static final float DEFAULT_VALUE1 = 0.3F;
+    private static final float DEFAULT_VALUE2 = 0.7F;
+    private static final float DEFAULT_PRICE1 = 10.0F;
+    private static final SimpleShare SIMPLESHARE1 = new SimpleShare(WELL_FORMED_NAME2);
+    private static final SimpleShare SIMPLESHARE2 = new SimpleShare(WELL_FORMED_NAME3);
+
+    static {
+        SIMPLESHARE1.setPrice(DEFAULT_DAY, DEFAULT_PRICE1);
+    }
 
     public ComposedShareTest() {
     }
@@ -27,7 +44,26 @@ public class ComposedShareTest {
     }
 
     @Test
-    public void testConstructor() {
-        ComposedShare cShare = new ComposedShare("test");
+    public void testConstructorWithCorrectParameter() {
+        new ComposedShare(WELL_FORMED_NAME1);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testConstructorWithInorrectParameter() {
+        new ComposedShare(MALFORMED_NAME);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testConstructorWithNullParameter() {
+        new ComposedShare(NULL_NAME);
+    }
+
+    @Test
+    public void testRegisterCompositionWithCorrectParameters() {
+        ComposedShare share = new ComposedShare(WELL_FORMED_NAME1);
+        share.registerComposition(SIMPLESHARE1, DEFAULT_VALUE1);
+        float value = share.getPrice(DEFAULT_DAY);
+        float expectedPrice = DEFAULT_VALUE1 * DEFAULT_PRICE1;
+        Assert.assertEquals(expectedPrice, value, 0.0F);
     }
 }
