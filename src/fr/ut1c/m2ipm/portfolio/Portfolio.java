@@ -23,7 +23,8 @@ public final class Portfolio {
     /**
      * Error message sent when the share object is null.
      */
-    private static final String SHARE_NULL_ERROR = "The share cannot be null";
+    private static final String SHARE_NULL_ERROR
+            = "The share cannot be null";
 
     /**
      * Build an empty portfolio.
@@ -104,7 +105,7 @@ public final class Portfolio {
     /**
      * A utility class that holds share and associated quantity.
      */
-    private final class PortfolioLine {
+    private static final class PortfolioLine {
 
         /**
          * A non null share.
