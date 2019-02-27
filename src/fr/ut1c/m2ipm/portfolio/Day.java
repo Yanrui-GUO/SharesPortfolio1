@@ -17,11 +17,13 @@ public final class Day {
     /**
      * Error message for day value negative or null.
      */
-    private static final String DAY_NEGATIVE_ERROR = "The day must be strictly positive";
+    private static final String DAY_NEGATIVE_ERROR
+            = "The day must be strictly positive";
     /**
      * Error message for year value negative or null.
      */
-    private static final String YEAR_NEGATIVE_ERROR = "The year must be strictly positive";
+    private static final String YEAR_NEGATIVE_ERROR
+            = "The year must be strictly positive";
     /**
      * Used to compute hascode.
      *

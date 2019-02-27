@@ -13,11 +13,13 @@ public final class Price {
     /**
      * Error message for a null day.
      */
-    private static final String INVALID_DAY = "The day cannot be null";
+    private static final String INVALID_DAY
+            = "The day cannot be null";
     /**
      * Error message for a negative or null value.
      */
-    private static final String INVALID_VALUE = "The value cannot be negative or null";
+    private static final String INVALID_VALUE
+            = "The value cannot be negative or null";
     /**
      * The day for the definition of a price cannot be null.
      */
