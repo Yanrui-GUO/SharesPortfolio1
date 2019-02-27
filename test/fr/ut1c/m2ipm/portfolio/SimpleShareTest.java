@@ -6,6 +6,7 @@
 package fr.ut1c.m2ipm.portfolio;
 
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -14,6 +15,13 @@ import org.junit.Test;
  * @author David
  */
 public class SimpleShareTest {
+
+    private static final String WELL_FORMED_NAME = "name1";
+    private static final String MALFORMED_NAME = "";
+    private static final String NULL_NAME = null;
+    private static final Day DEFAULT_DAY = new Day(1, 1);
+    private static final float DEFAULT_VALUE1 = 1.0F;
+    private static final float DEFAULT_VALUE2 = 2.0F;
 
     public SimpleShareTest() {
     }
@@ -27,7 +35,41 @@ public class SimpleShareTest {
     }
 
     @Test
-    public void testConstructor() {
-        SimpleShare simpleShare = new SimpleShare("test");
+    public void testConstructorWithCorrectParameter() {
+        new SimpleShare(WELL_FORMED_NAME);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testConstructorWithInorrectParameter() {
+        new SimpleShare(MALFORMED_NAME);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testConstructorWithNullParameter() {
+        new SimpleShare(NULL_NAME);
+    }
+
+    @Test
+    public void testSetGetPriceWithCorrectValues() {
+        SimpleShare share = new SimpleShare(WELL_FORMED_NAME);
+        share.setPrice(DEFAULT_DAY, DEFAULT_VALUE1);
+        float value = share.getPrice(DEFAULT_DAY);
+        Assert.assertEquals(DEFAULT_VALUE1, value, 0.0F);
+    }
+
+    @Test
+    public void testSetGetPriceTwiceWithCorrectValues() {
+        SimpleShare share = new SimpleShare(WELL_FORMED_NAME);
+        share.setPrice(DEFAULT_DAY, DEFAULT_VALUE1);
+        share.setPrice(DEFAULT_DAY, DEFAULT_VALUE2);
+        float value = share.getPrice(DEFAULT_DAY);
+        Assert.assertEquals(DEFAULT_VALUE1, value, 0.0F);
+    }
+
+    @Test
+    public void testGetPriceWhenNotDefined() {
+        SimpleShare share = new SimpleShare(WELL_FORMED_NAME);
+        float value = share.getPrice(DEFAULT_DAY);
+        Assert.assertEquals(0.0F, value, 0.0F);
     }
 }
