@@ -2,34 +2,99 @@ package fr.ut1c.m2ipm.portfolio;
 
 import java.util.Objects;
 
-public class Day {
+/**
+ * This class allows the construction of Days.
+ * <br>An object of this class represents a particular day defined by:
+ * <ul>
+ * <li>a day number (>0)</li>
+ * <li>a year number (>0)</li>
+ * </ul>
+ *
+ * @author David Navarre
+ */
+public final class Day {
 
-    private int year;
-    private int dayNumber;
+    /**
+     * Used to compute hascode.
+     *
+     * @see #hashCode()
+     */
+    private static final int BASE_HASHCODE_VALUE = 7;
+    /**
+     * Used to compute hascode.
+     *
+     * @see #hashCode()
+     */
+    private static final int BASE_HASHCODE_FACTOR = 53;
+    /**
+     * The year number must be >0.
+     */
+    private final int year;
+    /**
+     * The day number must be > 0.
+     */
+    private final int dayNumber;
+    /**
+     * The hashcode can be computed when the constructor is called.
+     */
+    private final int hashcode;
 
+    /**
+     * Build a day as a tuple <code>[year, day]</code>.
+     *
+     * @param aYear the year that defines the day. It must be >0
+     * @param aDayNumber the day that defines the day. It must be >0
+     */
+    public Day(final int aYear, final int aDayNumber) {
+        if (aYear <= 0) {
+            throw new IllegalArgumentException("The year must be strictly positive");
+        }
+        if (aDayNumber <= 0) {
+            throw new IllegalArgumentException("The day must be strictly positive");
+        }
+        this.year = aYear;
+        this.dayNumber = aDayNumber;
+
+        int hash = BASE_HASHCODE_VALUE;
+        hash = BASE_HASHCODE_FACTOR * hash + this.year;
+        hash = BASE_HASHCODE_FACTOR * hash + this.dayNumber;
+
+        hashcode = hash;
+    }
+
+    /**
+     * Provide read access to the year that defines the day. This method is not
+     * designed to be derived.
+     *
+     * @return the year >0
+     */
     public int getYear() {
         return year;
     }
 
+    /**
+     * Provide read access to the day that defines the object day. This method
+     * is not designed to be derived.
+     *
+     * @return the day >0
+     */
     public int getDayNumber() {
         return dayNumber;
     }
 
-    public Day(int year, int dayNumber) {
-        this.year = year;
-        this.dayNumber = dayNumber;
-    }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 61 * hash + this.year;
-        hash = 61 * hash + this.dayNumber;
-        return hash;
+        return hashcode;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         if (obj == null) {
             return false;
         }
@@ -37,10 +102,8 @@ public class Day {
             return false;
         }
         final Day other = (Day) obj;
-        if (this.year != other.year) {
-            return false;
-        }
-        return Objects.equals(this.dayNumber, other.dayNumber);
+        return Objects.equals(this.year, other.year)
+                && Objects.equals(this.dayNumber, other.dayNumber);
     }
 
 }
