@@ -3,22 +3,10 @@ package fr.ut1c.m2ipm.portfolio;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Portfolio allows to create a set of shares with associated quantities. It
- * allows buy, sell and compute the value of a set of shares.
- *
- * @author David Navarre
- */
 public class Portfolio {
 
-    /**
-     * This collection stores shares and their quantity.
-     */
     Map<Share, PortfolioLine> mapLines;
 
-    /**
-     * Build an empty Portfolio.
-     */
     public Portfolio() {
         this.mapLines = new HashMap();
     }
