@@ -11,6 +11,14 @@ import java.util.Objects;
 public final class Price {
 
     /**
+     * Error message for a null day.
+     */
+    private static final String INVALID_DAY = "The day cannot be null";
+    /**
+     * Error message for a negative or null value.
+     */
+    private static final String INVALID_VALUE = "The value cannot be negative or null";
+    /**
      * The day for the definition of a price cannot be null.
      */
     private final Day day;
@@ -28,10 +36,10 @@ public final class Price {
      */
     public Price(final Day aDay, final float aValue) {
         if (Objects.isNull(aDay)) {
-            throw new IllegalArgumentException("The day cannot be null");
+            throw new IllegalArgumentException(INVALID_DAY);
         }
         if (aValue <= 0) {
-            throw new IllegalArgumentException("The value cannot be negative or null");
+            throw new IllegalArgumentException(INVALID_VALUE);
         }
         this.day = aDay;
         this.value = aValue;

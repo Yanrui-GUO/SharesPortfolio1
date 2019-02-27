@@ -15,6 +15,14 @@ import java.util.Objects;
 public final class Day {
 
     /**
+     * Error message for day value negative or null.
+     */
+    private static final String DAY_NEGATIVE_ERROR = "The day must be strictly positive";
+    /**
+     * Error message for year value negative or null.
+     */
+    private static final String YEAR_NEGATIVE_ERROR = "The year must be strictly positive";
+    /**
      * Used to compute hascode.
      *
      * @see #hashCode()
@@ -47,10 +55,10 @@ public final class Day {
      */
     public Day(final int aYear, final int aDayNumber) {
         if (aYear <= 0) {
-            throw new IllegalArgumentException("The year must be strictly positive");
+            throw new IllegalArgumentException(YEAR_NEGATIVE_ERROR);
         }
         if (aDayNumber <= 0) {
-            throw new IllegalArgumentException("The day must be strictly positive");
+            throw new IllegalArgumentException(DAY_NEGATIVE_ERROR);
         }
         this.year = aYear;
         this.dayNumber = aDayNumber;
