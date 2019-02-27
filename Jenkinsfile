@@ -16,7 +16,7 @@ node () {
  				bat "ant clean jar checkstyle findbugs sonar "
 			}
 recordIssues(tools: [checkStyle(), findBugs(useRankAsPriority: true)])
-junit allowEmptyResults: true, testResults: '${basedir}/build/report/*.xml'
+junit allowEmptyResults: true, testResults: '**/build/report/*.xml'
  		}
 	}
 }
