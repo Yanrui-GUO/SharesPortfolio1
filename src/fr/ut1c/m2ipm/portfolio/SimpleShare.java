@@ -26,12 +26,12 @@ import java.util.Map;
  * A simple share is a share that holds a list of prices defined amongst a set
  * of days.
  *
- * @see Share
+ * @see AbstractShare
  * @see Day
  * @see Price
  * @author David Navarre
  */
-public class SimpleShare extends Share {
+public class SimpleShare extends AbstractShare {
 
     /**
      * A collection that maps a day into a price.

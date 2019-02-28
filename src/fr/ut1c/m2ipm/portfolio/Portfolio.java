@@ -33,7 +33,7 @@ public final class Portfolio {
     /**
      * Collections that holds association between shares and quantities.
      */
-    private final Map<Share, PortfolioLine> mapLines;
+    private final Map<AbstractShare, PortfolioLine> mapLines;
     /**
      * Error message sent when the quantity is negative or null.
      */
@@ -59,7 +59,7 @@ public final class Portfolio {
      * @param share the non empty share to be added
      * @param quantity the quantity to add (>0)
      */
-    public void buy(final Share share, final int quantity) {
+    public void buy(final AbstractShare share, final int quantity) {
         if (Objects.isNull(share)) {
             throw new IllegalArgumentException(SHARE_NULL_ERROR);
         }
@@ -81,7 +81,7 @@ public final class Portfolio {
      * @param share the share to remove
      * @param quantity the quantity to remove
      */
-    public void sell(final Share share, final int quantity) {
+    public void sell(final AbstractShare share, final int quantity) {
         if (Objects.isNull(share)) {
             throw new IllegalArgumentException(SHARE_NULL_ERROR);
         }
@@ -133,7 +133,7 @@ public final class Portfolio {
         /**
          * A non null share.
          */
-        private final Share share;
+        private final AbstractShare share;
         /**
          * The quantity must be strictly positive.
          */
@@ -145,7 +145,7 @@ public final class Portfolio {
          * @param aShare the share
          * @param aQuantity a strictly positive value
          */
-        PortfolioLine(final Share aShare, final int aQuantity) {
+        PortfolioLine(final AbstractShare aShare, final int aQuantity) {
             this.share = aShare;
             this.quantity = aQuantity;
         }
@@ -173,7 +173,7 @@ public final class Portfolio {
          *
          * @return the non null share
          */
-        public Share getShare() {
+        public AbstractShare getShare() {
             return this.share;
         }
 

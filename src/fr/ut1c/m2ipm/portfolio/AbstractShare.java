@@ -26,7 +26,7 @@ import java.util.Objects;
  *
  * @author David Navarre
  */
-public abstract class Share {
+public abstract class AbstractShare {
 
     /**
      * Name of the share.
@@ -45,7 +45,7 @@ public abstract class Share {
      *
      * @param aName the name of the share. This name cannot be null or empty.
      */
-    public Share(final String aName) {
+    public AbstractShare(final String aName) {
         if (Objects.isNull(aName) || aName.isEmpty()) {
             throw new IllegalArgumentException(ILLEGAL_NAME_ERROR);
         }
@@ -53,10 +53,10 @@ public abstract class Share {
     }
 
     /**
-     * Provide read access to the name of the Share.<br>
+     * Provide read access to the name of the AbstractShare.<br>
      * This method is not designed to be overriden.
      *
-     * @return the name of the Share
+     * @return the name of the AbstractShare
      */
     public final String getName() {
         return name;
@@ -92,10 +92,10 @@ public abstract class Share {
         if (obj == null) {
             return false;
         }
-        if (!(obj instanceof Share)) {
+        if (!(obj instanceof AbstractShare)) {
             return false;
         }
-        final Share other = (Share) obj;
+        final AbstractShare other = (AbstractShare) obj;
         return Objects.equals(this.name, other.name);
     }
 

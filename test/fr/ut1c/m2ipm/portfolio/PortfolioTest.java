@@ -21,7 +21,7 @@ public class PortfolioTest {
     private static final int DEFAULT_QUANTITY = 2;
     private static final Day DEFAULT_DAY = new Day(1, 1);
 
-    private static final Share SHARE1 = new Share(DEFAULT_NAME) {
+    private static final AbstractShare SHARE1 = new AbstractShare(DEFAULT_NAME) {
         @Override
         public float getPrice(Day day) {
             return DEFAULT_VALUE;

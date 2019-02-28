@@ -25,10 +25,10 @@ import java.util.Map;
 /**
  * Composed share represent a set of Shares.
  *
- * @see Share
+ * @see AbstractShare
  * @author navarre
  */
-public class ComposedShare extends Share {
+public class ComposedShare extends AbstractShare {
 
     /**
      * A map that stores simple shares and their rate within this composed
