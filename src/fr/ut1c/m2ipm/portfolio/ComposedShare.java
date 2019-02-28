@@ -1,3 +1,10 @@
+/*
+ * Copyright 2019 (C) M2 MIAGE IPM
+ *
+ * Created on : 28-02-2019
+ * Author     : David Navarre
+ *
+ */
 package fr.ut1c.m2ipm.portfolio;
 
 import java.util.HashMap;
