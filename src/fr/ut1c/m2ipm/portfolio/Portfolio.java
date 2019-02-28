@@ -94,6 +94,8 @@ public final class Portfolio {
                 this.mapLines.get(share).setQuantity(newQ);
             } else if (this.mapLines.get(share).getQuantity() == quantity) {
                 this.mapLines.remove(share);
+            } else {
+                //Ignored when quantity exceed availability.
             }
         }
     }
