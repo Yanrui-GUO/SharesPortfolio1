@@ -1,7 +1,11 @@
 /*
-* SharesPortfolio project is dedicated to teaching multiple purposes.
- * Copyright (C) 2019 M2 MIAGE IPM
+ * Portfolio, open source software.
+ * Copyright (C) 2014-2019 M2 MIAGE IPM
+ * mailto:navarre@irit.fr
  *
- * SharesPortfolio is a free software that does not do usefull things.
- * Created on : 28-02-2019
+ * Portfolio is free software; you can redistribute it and/or
+ * modify it under the terms of any License.
+ *
+ * Portfolio is distributed in the hope that it will be useless,
+ * but WITHOUT ANY WARRANTY.
  */
