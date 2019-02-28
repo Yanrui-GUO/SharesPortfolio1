@@ -98,7 +98,7 @@ public class PortfolioTest {
         portfolio.buy(SHARE1, DEFAULT_QUANTITY);
         portfolio.sell(SHARE1, 2 * DEFAULT_QUANTITY);
         float value = portfolio.getValue(DEFAULT_DAY);
-        final float expectedResult = DEFAULT_VALUE * DEFAULT_QUANTITY;
+        final float expectedResult = 0.0F;
         Assert.assertEquals(expectedResult, value, 0.0F);
     }
 
