@@ -49,8 +49,8 @@ public class ComposedShare extends Share {
         value = 0;
         for (Map.Entry<SimpleShare, Float> simpleShare
                 : this.sharesBasket.entrySet()) {
-            value += (simpleShare.getKey().getPrice(day)
-                    * simpleShare.getValue());
+            value += ((double) simpleShare.getKey().getPrice(day)
+                    * (double) simpleShare.getValue());
         }
 
         return (float) value;

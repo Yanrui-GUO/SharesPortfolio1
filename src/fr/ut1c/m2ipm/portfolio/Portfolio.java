@@ -97,7 +97,9 @@ public final class Portfolio {
     public float getValue(final Day day) {
         double total = 0;
         for (PortfolioLine lp : this.mapLines.values()) {
-            total = total + ((double) lp.getQuantity() * (double) lp.getShare().getPrice(day));
+            total = total
+                    + ((double) lp.getQuantity()
+                    * (double) lp.getShare().getPrice(day));
         }
         return (float) total;
     }
