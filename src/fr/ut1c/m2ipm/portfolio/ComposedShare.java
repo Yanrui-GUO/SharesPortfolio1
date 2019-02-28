@@ -1,9 +1,9 @@
 /*
- * Copyright 2019 (C) M2 MIAGE IPM
+* SharesPortfolio project is dedicated to teaching multiple purposes.
+ * Copyright (C) 2019 M2 MIAGE IPM
  *
+ * SharesPortfolio is a free software that does not do usefull things.
  * Created on : 28-02-2019
- * Author     : David Navarre
- *
  */
 package fr.ut1c.m2ipm.portfolio;
 
