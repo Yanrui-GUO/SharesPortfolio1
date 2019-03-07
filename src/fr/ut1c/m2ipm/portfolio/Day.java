@@ -2,6 +2,11 @@ package fr.ut1c.m2ipm.portfolio;
 
 import java.util.Objects;
 
+/**
+ * This class ...
+ *
+ * @author David
+ */
 public class Day {
 
     private int year;
